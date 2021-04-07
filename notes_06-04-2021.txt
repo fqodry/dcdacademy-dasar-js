@@ -1,0 +1,33 @@
+Pengenalan JavaScript
+- JavaScript termasuk kategori `Scripting Language`.
+- Ciri-ciri utama dari bahasa scripting yaitu kode tidak perlu di kompilasi (compile) agar bisa dijalankan.
+- Scripting Language menggunakan interpreter untuk menerjemahkan kode/perintah yang kita tulis agar dimengerti oleh mesin.
+- Dibuat tahun 1995 oleh Brendan Eich, programmer dari Netscape.
+- Sebelumnya bernama `Mocha` kemudian berubah menjadi `LiveScript`, dan memanfaatkan kepopuleran bahasa Java pada saat itu, maka dirubah kembali menjadi `JavaScript`.
+- JavaScript sama sekali tidak ada hubungannnya dengan bahasa pemrograman Java.
+- JavaScript distandarisasi oleh European Computer Manufacturers Association (ECMA), sejak saat itu JavaScript dikenal juga dengan ECMAScript.
+- ECMAScript 5 rilis 2009, update besar JavaScript pada versi ECMAScript 6 rilis tahun 2015
+- Beberapa kelebihan JavaScript:
+	- JavaScript bahasa yang versatile (bisa berjalan di lingkungan browser, server, bahkan desktop)
+	- Mudah dipelajari oleh pemula (konfigurasi awal tidak diperlukan, bisa menggunakan browser untuk menulis kode JavaScript. Komunitas di StackOverflow yang besar)
+	- Potensi karir yang meyakinkan
+
+JavaScript Fundamentals
+- Sejak ES6, `var` tidak digunakan lagi dan digantikan oleh `let` dan `const`. Karena var akan rawan menimbulkan bug.
+	*referensi: https://softwareengineering.stackexchange.com/questions/274342/is-there-any-reason-to-use-the-var-keyword-in-es6
+- Fungsi typeof() digunakan untuk memastikan tipe data pada variabel dengan mengembalikan tipe data tersebut dalam bentuk teks.
+- let x; => Sebuah variabel yang dideklarasikan tanpa menginisialisasi nilainya, maka tipe datanya adalah `undefined`
+- Tipe data Number (angka), termasuk desimal seperti 10.8 ini termasuk Number, cakupan nilainya -(2^53 - 1) s/d (2^53 - 1)
+- Tipe data BigInt, cakupan nilainya lebih besar dari Number. Nilai BigInt ditambahkan karakter `n` di akhir angka.
+	*contoh deklarasi BigInt:
+	- const bigNumber = 1234567890123456789012345678901234567890n;
+- Operator:
+	- Assignment Operator (=, +=)
+	- Comparison Operator (==, !=, ===, !==, >, >=, <, <=)
+		*notes: yg membedakan `sama` (==/!=) dan `identik` (===/!==) yaitu `sama` hanya pada nilainya saja, kalau `identik` nilainya sama begitu juga tipe datanya juga sama.
+	- Logical Operator (&&, || atau AND, OR)
+				Tabel logika AND				Tabel logika OR
+				AND | T | F 						OR | T | F
+		  		T | T | F 						 T | T | T
+		  		F | F | F 						 F | T | F
+- 

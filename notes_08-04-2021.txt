@@ -1,0 +1,133 @@
+Data Structures
+- Object, Array, Map, Set
+- Object dan properti-propertinya tidak terikat. Misalnya jika object dideklarasikan sebagai const, properti-properti didalamnya tetap bisa berubah nilainya.
+- Tetapi beda kasusnya jika kita menginisialisasi ulang atau assign ulang value dari objeknya, misal:
+	const character = {
+		name: "Firman Qodry",
+		age: 30,
+		gender: "Male"
+	}
+
+	Kita lakukan inisialisasi ulang menjadi:
+	character = {
+		name: "Annisa Hapsari",
+		age: 29,
+		gender: "Female"
+	}
+
+	Ini akan terjadi error.
+- Perbedaan Array dan Object adalah data pada Array disusun secara berurutan dan diakses menggunakan index.
+- Untuk mengakses Array => myArray[0] //dengan kurung siku
+- Untuk menambahkan data di akhir Array menggunakan fungsi `push()`
+	contoh:
+		let myArray = ["Hello", 1.5, 2, true, "World"];
+		myArray.push("ini nilai baru");
+		console.log(myArray); // maka akan menghasilkan ["Hello", 1.5, 2, true, "World", "ini nilai baru"]
+- Untuk mengeliminasi data di akhir Array menggunakan fungsi `pop()`
+- Fungsi lain untuk memanipulasi data pada Array yaitu shift() dan unshift()
+	- shift() untuk mengeluarkan elemen pertama dari Array
+	- unshift() untuk menambahkan elemen di awal Array
+- Keyword `delete` untuk menghapus elemen Array, tetapi tidak menghilangkan indexnya.
+	- contoh:
+		let myArray = ["Hello", 1.5, 2, true, "World"];
+		delete myArray[1];
+		console.log(myArray); // akan menghasilkan ["Hello", &lt;1 empty item&gt;, 2, true, "World"]
+- Untuk menghapus elemen Array sekaligus indexnya, gunakan method splice()
+	- contoh:
+		const myArray = ["Hello", 1.5, 2, true, "World"];
+		myArray.splice(3, 1); // delete Array mulai dari index ke-3, sebanyak 1 elemen.
+		console.log(myArray); // akan menghasilkan ["Hello", 1.5, 2, "World"]
+- Fitur menarik pada ES6, masih berkaitan dengan Array yaitu Spread Operator
+	- Fitur ini dapat digunakan untuk menggabungkan 2 buah Array
+		- contoh:
+			const favorites = ["Seafood", "Salad", "Nugget", "Soup"];
+			const others = ["Cake", "Pie", "Donut"];
+
+			const allFavorites = [...favorites, ...others];
+
+			console.log(allFavorites); // akan menjadi ['Seafood', 'Salad', 'Nugget', 'Soup', 'Cake', 'Pie', 'Donut']
+- Destructuring Object => mengeluarkan nilai dari Array atau elemen dari Object ke dalam satuan yg lebih kecil.
+	- ES6 memiliki metode untuk destructuring object secara mudah, yaitu menggunakan object literal {} di sisi kiri dari operator assignment
+	- contoh:
+		const profile = {
+	    firstName: "John",
+	    lastName: "Doe",
+	    age: 18
+		}
+ 
+		const {firstName, lastName} = profile;
+ 
+		console.log(firstName, lastName, age); // maka akan menghasilkan string `John Doe`
+
+		ATAU jika sebelumnya variabel sudah dideklarasikan, untuk menginisialisasi ulang variabel tersebut bisa dengan menambahkan tanda kurung ()
+
+		contoh:
+		const profile = {
+	    firstName: "John",
+	    lastName: "Doe",
+	    age: 18
+		}
+
+		let firstName = "Firman";
+		let age = 30;
+ 
+		({firstName, age} = profile); // inisialisasi nilai baru melalui object destructure
+ 
+		console.log(firstName, age); // maka akan menghasilkan string `John 18` bukan `Firman 30`
+	- Memberikan default value ketika melakukan destructure object
+		- contoh: 
+			const profile = {
+		    firstName: "John",
+		    lastName: "Doe",
+		    age: 18
+			}
+	 
+			const {firstName, age, isMale = false} = profile; // untuk variabel isMale sudah di set default valuenya menjadi false
+			 
+			console.log(firstName) // akan menampilkan `John`
+			console.log(age) // akan menampilkan 18
+			console.log(isMale) // akan menampilkan nilai boolean false, bukan undefined (karena sudah di set default valuenya false)
+	- Melakukan assign ke local variabel lain 
+		- contoh:
+			const profile = {
+		    firstName: "John",
+		    lastName: "Doe",
+		    age: 18
+			}
+			 
+			const {firstName: localFirstName, lastName: localLastName, age: localAge} = profile; // variabel firstName di assign ke localFirstName, dst.
+			 
+			console.log(localFirstName); // `John`
+			console.log(localLastName); // `Doe`
+			console.log(localAge); // 18
+- Destructuring Array, serupa dengan Destructuring Object, bedanya kalau destructuring object menggunakan kurung kurawal {}, kalau destructuring array menggunakan kurung siku []
+	- Swap nilai dengan array desctructuring assignment
+		- contoh:
+			let a = 1;
+			let b= 2;
+			 
+			console.log("Sebelum swap");
+			console.log("Nilai a: " + a); // 1
+			console.log("Nilai b: " + b); // 2
+			 
+			[a, b] = [b, a]
+			 
+			console.log("Setelah swap");
+			console.log("Nilai a: " + a); // 2
+			console.log("Nilai b: " + b); // 1
+- Map: tipe data yang menyimpan koleksi data dengan format key-value layaknya Object
+- Map memperbolehkan key dengan tipe data apa pun, dibandingkan Object yang hanya mengizinkan key bertipe String atau Symbol.
+	- contoh deklarasi Map:
+		const student = new Map([
+			[1, "elemen Map pertama"],
+			["Firman", "Teknik Informatika"],
+			[undefined, "Ini elemen dengan key undefined"],
+			[false, true]
+		]);
+	- Untuk mengakses elemen di dalam Map menggunakan perintah get()
+		- contoh:
+			console.log(student.get("Firman")); // mengacu pada variabel student di atas, akan menampilkan `Teknik Informatika`
+	- Untuk menambah elemen di akhir Map menggunakan perintah set()
+		- contoh:
+			student.set("Annisa", "Teknik Sipil");
+			=> variabel student akan menjadi: Map(1 => "elemen Map pertama", "Firman" => "Teknik Informatika", undefined => "Ini elemen dengan key undefined", false => true, "Annisa" => "Teknik Sipil")

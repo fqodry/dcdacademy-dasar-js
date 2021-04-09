@@ -3,7 +3,7 @@ Pengenalan JavaScript
 - Ciri-ciri utama dari bahasa scripting yaitu kode tidak perlu di kompilasi (compile) agar bisa dijalankan.
 - Scripting Language menggunakan interpreter untuk menerjemahkan kode/perintah yang kita tulis agar dimengerti oleh mesin.
 - Dibuat tahun 1995 oleh Brendan Eich, programmer dari Netscape.
-- Sebelumnya bernama `Mocha` kemudian berubah menjadi `LiveScript`, dan memanfaatkan kepopuleran bahasa Java pada saat itu, maka dirubah kembali menjadi `JavaScript`.
+- Sebelumnya bernama `Mocha` kemudian berubah menjadi `LiveScript`, dan selanjutnya memanfaatkan kepopuleran bahasa Java pada saat itu, maka dirubah kembali menjadi `JavaScript`.
 - JavaScript sama sekali tidak ada hubungannnya dengan bahasa pemrograman Java.
 - JavaScript distandarisasi oleh European Computer Manufacturers Association (ECMA), sejak saat itu JavaScript dikenal juga dengan ECMAScript.
 - ECMAScript 5 rilis 2009, update besar JavaScript pada versi ECMAScript 6 rilis tahun 2015
@@ -21,13 +21,25 @@ JavaScript Fundamentals
 - Tipe data BigInt, cakupan nilainya lebih besar dari Number. Nilai BigInt ditambahkan karakter `n` di akhir angka.
 	*contoh deklarasi BigInt:
 	- const bigNumber = 1234567890123456789012345678901234567890n;
+- Macam Tipe Data di JavaScript:
+	1. Undefined
+	2. Number
+	3. BigInt
+	4. String
+	5. Boolean
+	6. Null
+	7. Symbol
 - Operator:
 	- Assignment Operator (=, +=)
 	- Comparison Operator (==, !=, ===, !==, >, >=, <, <=)
-		*notes: yg membedakan `sama` (==/!=) dan `identik` (===/!==) yaitu `sama` hanya pada nilainya saja, kalau `identik` nilainya sama begitu juga tipe datanya juga sama.
+		*notes: yg membedakan `sama` (==/!=) dan `identik` (===/!==) yaitu `sama` hanya pada nilainya saja, kalau `identik` nilainya sama begitu juga tipe datanya.
 	- Logical Operator (&&, || atau AND, OR)
 				Tabel logika AND				Tabel logika OR
 				AND | T | F 						OR | T | F
 		  		T | T | F 						 T | T | T
 		  		F | F | F 						 F | T | F
-- 
+- If/Else Statement
+	Truthy and Falsy => setiap nilai pada JavaScript pada dasarnya mewarisi sifat boolean. Nilai ini dikenal dengan truthy dan falsy.
+	- Falsy : Number 0, BigInt 0n, String kosong seperti "" atau '', undefined, null, NaN (Not a Number)
+	*selain contoh di atas maka nilainya adalah truthy.
+- Loop => for loop, for of loop, while and do-while

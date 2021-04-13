@@ -1,0 +1,58 @@
+FUNCTIONS
+- Function/fungsi adalah blok atau kumpulan kode yang memungkinkan untuk dipanggil berkali-kali.
+- Penamaan fungsi harus mendeskripsikan fungsi dengan jelas. Penamaan yang bagus akan langsung memberi kita pemahaman tentang apa yang dilakukan atau dikembalikan.
+- Function dapat menerima masukan nilai melalui parameter.
+- Fungsi dapat mengembalikan nilai. Jika tidak, maka hasilnya adalah undefined.
+- Karena fungsi berupa nilai, fungsi dapat ditetapkan atau dideklarasikan di setiap tempat kode, termasuk variabel atau parameter dari fungsi lain.
+
+- Mendeklarasikan fungsi:
+	function multiply() {
+		return 2 * 4;
+	}
+
+	ATAU dengan menambahkan parameter fungsi:
+	function multiply(a, b) {
+		return a * b;
+	}
+
+- Perbedaan Parameter & Argument (penggunaan istilah ini sering kali tertukan, bahkan di kalangan developer)
+	- Parameter => variabel yang didefinisikan sebagai inputan dari sebuah fungsi
+		contoh:
+		function multiply(a, b) { // a dan b disini masing-masing adalah parameter
+			return a * b;
+		}
+	- Argument => nilai atau expression yang dimasukkan ke dalam fungsi
+		contoh:
+		multiply(2, 3); // 2 dan 3 masing-masing adalah argument
+
+- Expression Function => Pada expression function umumnya kita tidak perlu menuliskan nama fungsinya. Fungsi yang tidak bernama juga dikenal dengan anonymous function.
+	contoh expression function:
+	const greeting = function(name, address) {
+		return `Halo nama saya ${name}, saya tinggal di ${address}.`;
+	}
+
+- Arrow Function => ES6 memperkenalkan fungsi baru yang dinamakan Arrow Function Expression atau lebih dikenal sebagai Arrow Function.
+	- Fungsi pada arrow function didefinisikan menggunakan tanda panah/fat arrow (=>)
+	- contoh arrow function:
+		const perkenalan = (greet) => {
+			console.log(`${greet}!`);
+		}
+
+		const sayName = (name, address) => {
+			console.log(`Halo nama saya ${name}, saya tinggal di ${address}.`);
+		}
+
+- Closure => Suatu fungsi yang dapat mengakses variabel di dalam lexical scope-nya disebut dengan closure. 
+	- Lexical scope berarti pada sebuah fungsi bersarang, fungsi yang berada di dalam memiliki akses ke variabel di lingkup induknya.
+	- contoh:
+		function init() {
+			var name = "Firman Qodry";
+
+			function greet() {
+				console.log(`Halo, ${name}`);
+			}
+
+			greet()
+		}
+
+		init(); // print: Halo, Firman Qodry

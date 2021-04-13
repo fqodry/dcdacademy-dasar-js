@@ -16,6 +16,7 @@ Data Structures
 	}
 
 	Ini akan terjadi error.
+- Cara mengakses object => (nama_variabel).(key_objectnya), misal: `character.name` akan menghasilkan `Firman Qodry`
 - Perbedaan Array dan Object adalah data pada Array disusun secara berurutan dan diakses menggunakan index.
 - Untuk mengakses Array => myArray[0] //dengan kurung siku
 - Untuk menambahkan data di akhir Array menggunakan fungsi `push()`
@@ -23,7 +24,7 @@ Data Structures
 		let myArray = ["Hello", 1.5, 2, true, "World"];
 		myArray.push("ini nilai baru");
 		console.log(myArray); // maka akan menghasilkan ["Hello", 1.5, 2, true, "World", "ini nilai baru"]
-- Untuk mengeliminasi data di akhir Array menggunakan fungsi `pop()`
+- Untuk menghapus data di akhir Array menggunakan fungsi `pop()`
 - Fungsi lain untuk memanipulasi data pada Array yaitu shift() dan unshift()
 	- shift() untuk mengeluarkan elemen pertama dari Array
 	- unshift() untuk menambahkan elemen di awal Array
@@ -131,3 +132,15 @@ Data Structures
 		- contoh:
 			student.set("Annisa", "Teknik Sipil");
 			=> variabel student akan menjadi: Map(1 => "elemen Map pertama", "Firman" => "Teknik Informatika", undefined => "Ini elemen dengan key undefined", false => true, "Annisa" => "Teknik Sipil")
+- Set: tipe data yang menyimpan koleksi data
+- Tetapi data yang dikumpulkan pada Set tidak berurutan dan tidak di indeks
+- Data pada Set bersifat unik (tidak ada duplikasi)
+- Untuk menambahkan data ke dalam Set digunakan perintah `add()`
+	- contoh:
+		const numberSet = new Set([1, 2, 3, 2, 1]);
+		numberSet.add(4);
+		numberSet.add(5);
+		numberSet.add(3);
+
+		console.log(numberSet); // akan menghasilkan `Set(5) {1, 2, 3, 4, 5}`
+- Untuk menghapus data pada Set digunakan perintah `delete()`, tetapi karena Set tidak memiliki indeks, maka argumen yang dimasukkan ke dalam fungsi delete() adalah nilai yang ingin dihapus

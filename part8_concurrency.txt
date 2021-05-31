@@ -1,0 +1,161 @@
+CONCURRENCY
+- Concurrency berarti beberapa proses komputasi yang terjadi pada saat yang bersamaan
+- Berbicara mengenai concurrency artinya akan membahas Synchronous dan Asynchronous
+- Synchronous program => kode dijalankan berurutan dari atas ke bawah.
+- Asynchronous program => jika menuliskan 2 baris kode, kita dapat membuat baris kode kedua dieksekusi tanpa harus menunggu kode pada baris pertama selesai dieksekusi
+- Dalam program yang dijalankan secara asynchronous task yang kecil akan lebih dahulu selesai dibandingkan dengan task yang besar, meskipun task yang besar lebih dahulu dijalankan
+- Fungsi setTimeout() merupakan cara yang paling mudah untuk membuat kode kita dijalankan secara asynchronous
+	console.log("Selamat datang!");
+	setTimeout({
+		console.log("Terima kasih sudah mampir, silakan datang kembali!");
+	}, 3000);
+	console.log("Ada yang bisa dibantu?");
+
+	- Jika prosesnya berjalan synchronous maka kode di atas akan berjalan:
+		1. Mencetak `Selamat datang!`
+		2. Menunggu selama 3 detik
+		3. Mencetak `Terima kasih sudah mampir, silakan datang kembali!`
+		4. Mencetak `Ada yang bisa dibantu?`
+	- Nyatanya setTimeout() tidak akan menghentikan JavaScript untuk mengeksekusi kode pada baris berikutnya
+	- Urutan seharusnya menjadi:
+		1. Mencetak `Selamat datang!`
+		2. Mencetak `Ada yang bisa dibantu?`
+		3. Menunggu selama 3 detik
+		4. Mencetak `Terima kasih sudah mampir, silakan datang kembali!`
+
+- Callback Function
+	const orderCoffee = () => {
+		let coffee = null;
+		console.log("Sedang membuat kopi, silakan tunggu...");
+		setTimeout({
+			coffee = "Kopi sudah jadi!";
+		}, 3000);
+		return coffee;
+	};
+
+	const coffee = orderCoffee();
+	console.log(coffee);
+
+	/** output
+	Sedang membuat kopi, silahkan tunggu...
+	null
+	*/
+
+	*notes: jika kode di atas dijalankan, maka akan mengembalikan nilai null, karena kode tidak akan menunggu operasi setTimeout() selesai dan akan langsung mengembalikan nilai coffee di inisiasi awal yaitu null.
+	- Untuk bisa mendapatkan nilai pada blok kode asynchronous, digunakanlah callback function
+	- Maka kode di atas akan menjadi:
+		const orderCoffee = callback => {
+			let coffee = null;
+			console.log("Sedang membuat kopi, silakan tunggu...");
+			setTimeout({
+				coffee = "Kopi sudah jadi!";
+				callback(coffee);
+			}, 3000);
+		};
+
+		orderCoffee(coffee => {
+			console.log(coffee);
+		});
+
+		/** output
+		Sedang membuat kopi, silakan tunggu...
+		----- setelah 3 detik -----
+		Kopi sudah jadi!
+		*/
+
+- Callback Hell
+	- Misalnya kita akan membuat sebuah kue, maka tahapannya adalah:
+		1. Menyiapkan bahan
+		2. Membuat adonan
+		3. Memasukkan adonan ke dalam cetakan
+		4. Memanggang adonan
+	- Untuk bisa menjalankan tahapan-tahapan tersebut dalam kode asynchronous maka kita akan membuat Callback Hell.
+	- Callback Hell terjadi karena banyak sekali callback function yang bersarang karena saling membutuhkan satu sama lain
+		function makeACake(...rawIngredients) {
+			collectIngredients(rawIngredients, function(ingredients) {
+				makeTheDough(ingredients, function(dough) {
+					pourDough(dough, function(pouredDough) {
+						bakeACake(pouredDough, function(cake) {
+							console.log(cake);
+						});
+					});
+				});
+			});
+		}
+		*notes: melihat kode bersarang banyak seperti ini pastinya akan membuat kepala kita pusing
+	- Solusi dari Callback Hell yaitu Promise
+		function makeACake(...rawIngredients) {
+			collectIngredients(rawIngredients)
+				.then(makeTheDough)
+				.then(pourDough)
+				.then(bakeACake)
+				.then(console.log);
+		}
+
+- Promise
+	- seperti artinya yaitu `Janji`, fungsi ini akan membuatkan janji
+	- Tetapi janji kadang tinggal janji, bisa tidak terpenuhi, entah karena satu atau lain hal
+	- Promise juga memiliki perilaku seperti itu, Promise memiliki tiga kondisi:
+		1. Pending (janji sedang dalam proses),
+		2. Fulfilled (janji terpenuhi), dan
+		3. Rejected (janji gagal terpenuhi)
+	- Membuat objek Promise
+		const executorFunction = (resolve,reject) => {
+			const isCoffeemakerReady = true;
+			if (isCoffeemakerReady)
+				resolve("Kopi berhasil dibuat");
+			else
+				reject("Mesin kopi tidak bisa digunakan");
+		};
+
+		const makeCoffee = () => {
+			return new Promise(executorFunction);
+		}
+
+		const coffeePromise = makeCoffee();
+		console.log(coffeePromise);
+
+		/** output
+		Promise { 'Kopi berhasil dibuat' }
+		*/
+
+	- Consuming Promises
+		- status awal dari Promise adalah `pending` kemudian akan ada 2 kemungkinan yang terjadi, yaitu `fulfilled` dan `rejected`
+		- untuk menangani hasil dari Promise digunakan method high-order `then()`
+		- then() adalah sebuah higher-order function yang membutuhkan 2 parameter callback function/handler (success & failure handler)
+		- kodenya:
+			const stock = {
+			  coffeeBeans: 250,
+			  water: 1000
+			};
+
+			const checkStock = new Promise((resolve, reject) => {
+			  if (stock.coffeeBeans >= 16 && stock.water >= 250) {
+			    resolve("Stok cukup. Bisa membuat kopi");
+			  } else {
+			    reject("Stok tidak cukup");
+			  }
+			});
+
+			const successHandler = resolvedValue => {
+			  console.log("SUCCESS:" + resolvedValue);
+			};
+
+			const failureHandler = rejectionReason => {
+			  console.log("FAILURE:" + rejectionReason);
+			};
+
+			// success & failure handler in then
+			// checkStock.then(successHandler, failureHandler);
+
+			// seperate the success handler and failure handler w/ then and catch (onRejected with Catch Method)
+			checkStock.then(successHandler).catch(failureHandler);
+
+	- Chaining Promises
+		- chaining promises, cara yang dapat kita gunakan untuk menghindari callback hell
+		- proses asyncrhonous yang saling bergantungan satu sama lain tidak dapat dihindari, biasanya kita menggunakan callback hell, tetapi untuk menghindari itu solusinya adalah dengan Chaining Promise
+		- Chaining Promise atau Promise berantai, dengan analogi pembuatan secangkir kopi. Dari mulai pengecekan mesin kopi ready/tidak, cek stok biji kopi, dan bahan lainnya, lalu kemudian proses pembuatan kopi, dan terakhir menuangkannya ke dalam cangkir.
+		- kodenya:
+			
+
+	

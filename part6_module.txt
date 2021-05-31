@@ -1,0 +1,51 @@
+MODULE
+- Module memungkinkan kita untuk menghubungkan berkas JavaScript yang terpisah agar dapat saling digunakan
+	- Misal ada 3 buah class, 1 class Main dan 2 sisanya adalah class Koki dan Pelayan
+	- Class Main membutuhkan variabel atau fungsi yang ada pada class Koki dan juga Pelayan
+	- Untuk bisa memenuhi itu, kita bisa melakukan export classs Koki dan Pelayan, lalu meng-importnya di class Main
+	- contoh:
+		Koki.js
+		class Koki {
+			constructor() {
+				this.tools = 'pisau';
+				this.skills = ['memasak', 'memotong', 'membakar'];
+			}
+
+			info() {
+				console.log('Halo, saya adalah seorang Koki profesional !');
+			}
+		}
+
+		module.exports = Koki; 											// melakukan export class Koki dengan format CommonJS
+		export default Koki; 												// melakukan export class Koki dengan format ES6
+
+		============================== separator ======================================
+
+		Pelayan.js
+		class Pelayan {
+			constructor() {
+				this.tools = 'catatan';
+				this.skills = ['melayani', 'berbicara', 'mengingat'];
+			}
+
+			info() {
+				console.log('Halo, saya adalah seorang Pelayan yang handal !');
+			}
+		}
+
+		module.exports = Pelayan;											// melakukan export class Pelayan dengan format CommonJS
+		export default Pelayan;												// melakukan export class Pelayan dengan format ES6
+
+		============================== separator ======================================
+
+		Main.js
+		class Main {
+			const Koki = require('./Koki.js'); 					// melakukan import class Koki dengan format CommonJS
+			const Pelayan = require('./Pelayan.js'); 		// melakukan import class Pelayan dengan format ES6
+
+			const koki = new Koki();
+			const pelayan = new Pelayan();
+
+			console.log(koki);
+			console.log(pelayan);
+		}

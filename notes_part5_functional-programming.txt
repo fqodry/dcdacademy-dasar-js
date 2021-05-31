@@ -1,0 +1,10 @@
+FUNCTIONAL PROGRAMMING
+- Konsep-konsep functional programming:
+	1. Pure Function
+		- Pure Function merupakan konsep dari pembuatan fungsi yang mengharuskan fungsi untuk tidak bergantung terhadap nilai yang berada di luar fungsi atau parameternya.
+		- Pure function juga dilarang keras untuk mengubah nilai yang berada di luar baik secara sengaja atau tidak sengaja.
+	2. Immutability
+	3. High-Order Function
+
+- Contoh penerapan Pure Function
+	

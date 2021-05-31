@@ -1,0 +1,25 @@
+ERROR HANDLING
+- Try and Catch
+	- contoh penulisan:
+		try {
+			// kode yg berpeluang menimbulkan error
+		} catch(error) {
+			// kode error handling
+		}
+
+	- contoh:
+		try {
+			console.log("ini awal blok try"); // (1)
+
+			variabelUndefined;								// (3)
+
+			console.log("ini akhir blok try"); // (5)
+		} catch(error) {
+			console.log("Terjadi error !");
+		}
+
+		*kode di atas akan mencetak:
+			ini awal blok try
+			Terjadi error !
+
+		*alasan: terjadi error pada baris no. 3, karena variabel `variabelUndefined` belum pernah di definisikan.

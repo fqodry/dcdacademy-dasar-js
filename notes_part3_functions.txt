@@ -15,7 +15,7 @@ FUNCTIONS
 		return a * b;
 	}
 
-- Perbedaan Parameter & Argument (penggunaan istilah ini sering kali tertukan, bahkan di kalangan developer)
+- Perbedaan Parameter & Argument (penggunaan istilah ini sering kali tertukar, bahkan di kalangan developer)
 	- Parameter => variabel yang didefinisikan sebagai inputan dari sebuah fungsi
 		contoh:
 		function multiply(a, b) { // a dan b disini masing-masing adalah parameter

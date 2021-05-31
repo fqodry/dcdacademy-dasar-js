@@ -1,0 +1,127 @@
+OBJECT ORIENTED PROGRAMMING (OOP)
+- 4 pilar utama OOP (A-PIE):
+	1. Abstraction => menjelaskan bagaimana sebuah objek bersifat abstrak (analoginya: tidak kelihatan/tidak jelas), hasil dari Enkapsulasi, elemen dari luar objek/class tidak perlu tahu isi atau logika dari sebuah method di class tersebut.
+
+	2. Polymorphism => artinya banyak bentuk, untuk setiap objek yg bisa mengakses method yg sama, tetapi penerapannya bisa banyak bentuk. Misal: whatsapp dan sms sama-sama bisa mengirim pesan, tetapi pada whatsapp bisa mengirim pesan suara, di sms tidak bisa (hanya teks saja)
+
+	3. Inheritance => konsep pewarisan. class/objek pada OOP berlaku sistem hirarki parent-child. Di mana sifat-sifat yang ada pada parent bisa diwariskan ke masing-masing childnya. Misal: sebuah method sendMessage() pada class Mail bisa diakses oleh class child Email
+
+	4. Encapsulation => perumpamaan sebuah capsul, sifatnya tertutup. Sebuah class harus seperti capsul, tertutup. Atribut dan Methodnya harus tidak bisa diakses dari luar
+
+- OOP pada JavaScript terbilang unik
+- Untuk mendeklarasikan sebuah objek bisa menggunakan class, bisa juga menggunakan function
+	contoh:
+	class Kucing {
+		nama = "Kitty";
+		warnaBulu = "Cokelat";
+		mengeong = () => {
+			console.log(this.nama, 'yang memiliki warna bulu', this.warnaBulu, 'suka mengeong.');
+		};
+	}
+
+	ATAU dengan function
+
+	function Kucing() {
+		this.nama = "Kitty";
+		this.warnaBulu = "Cokelat";
+		mengeong = function() {
+			console.log(this.nama, 'yang memiliki warna bulu', this.warnaBulu, 'suka mengeong.');
+		};
+	};
+
+- Identifier pada JavaScript
+	- public => dapat diakses dari mana pun.
+	- private => hanya dapat diakses dari dalam kelas itu sendiri.
+	*secara default, semua atribut yang didefinisikan adalah public
+
+- Untuk membuat atribut menjadi private ada beberapa cara
+	1. menggunakan var (hanya dapat digunakan pada penulisan kelas dengan statement `function`)
+			function Kucing {
+				nama = "Kitty";
+				warnaBulu = "Cokelat";
+				var makananKesukaan = [];
+				mengeong = (makanan) => {
+					console.log(this.nama, 'yang memiliki warna bulu', this.warnaBulu, 'suka mengeong dan suka makan', makanan);
+					makananKesukaan.push(makanan);
+				}
+			}
+	2. menambahkan prefix _ (dapat digunakan pada penulisan kelas dengan statement `function` atau `class`)
+			class Kucing {
+				nama = "Kitty";
+				warnaBulu = "Cokelat";
+				_makananKesukaan = [];
+				mengeong = (makanan) => {
+					console.log(this.nama, 'yang memiliki warna bulu', this.warnaBulu, 'suka mengeong dan suka makan', makanan);
+					this._makananKesukaan.push(makanan);
+				}
+			}
+	3. menambahkan prefix # (hanya dapat digunakan pada penulisan kelas dengan statement `class`)
+			class Kucing {
+				nama = "Kitty";
+				warnaBulu = "Cokelat";
+				#makananKesukaan = [];
+				mengeong = (makanan) => {
+					console.log(this.nama, 'yang memiliki warna bulu', this.warnaBulu, 'suka mengeong dan suka makan', makanan);
+					this.#makananKesukaan.push(makanan);
+				}
+			}
+
+- Overriding => teknik untuk melakukan perombakan pada sebuah method/constructor yang dimiliki parent class sehingga dapat disesuaikan dengan behaviour di child class.
+	- Overriding Constructor
+		contoh:
+		class Kucing {
+			constructor(name) {
+				this.name = name;
+			};
+			warnaBulu = [];
+			....
+		}
+
+		// contoh overriding constructor pada class KucingPersia
+		class KucingPersia extends Kucing {
+			constructor(name, age) {
+				super(name); // gunakan method super() untuk mengeksekusi method parentnya
+				this.age = age;
+			}
+			....
+		}
+	- Overriding Method => sama seperti overriding constructor namun yang di override adalah method-method yang ada pada parent class.
+		contoh:
+		class Kucing {
+			....
+			mengeong = (makanan) => {
+				console.log(this.nama, 'yang memiliki warna bulu', this.warnaBulu, 'suka mengeong dan suka makan', makanan);
+			};
+		}
+
+		class KucingPersia {
+			....
+			mengeong = (makanan) => {
+				super.mengeong(makanan); // untuk bisa memanggil parent method `mengeong()`
+				console.log("Kucing Persia juga bisa mengeong lho... Miaaww~");
+			}
+		}
+
+		const kucingPersia = new KucingPersia("Jeki", 9);
+		kucingPersia.mengeong("ikan kering");
+		// akan menampilkan:
+		// `Jeki yang memiliki warna bulu Kuning suka mengeong dan suka makan ikan kering`
+		// `Kucing Persia juga bisa mengeong lho... Miaaww~`
+
+	- Object Composition
+		- Object composition adalah prinsip komposisi dari sebuah alur bisnis tanpa perlu melakukan pewarisan dari parent-nya.
+		
+	- Built-in Class
+		- Date => Date merupakan core object bawaan dari bahasa pemrograman JavaScript yang digunakan untuk utilitas terkait tanggal dan waktu.
+			contoh:
+			const myDate = new Date(); // menampilkan tanggal saat ini
+			
+			const myDate = new Date(dateString); // menampilkan tanggal dalam bentuk string "January 01, 2021"
+			
+			const myDate = new Date(miliseconds); // dalam bentuk number (seconds), misal 87400000
+			
+			const myDate = new Date(year,month,date,hour,minute,second,millisecond); //dalam bentuk number (7 parameter), [hour,minute,second,millisecond] bersifat opsional
+		- Object
+		- Array
+		- Math
+		- String
